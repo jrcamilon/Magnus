@@ -1,0 +1,719 @@
+<div *ngIf="isAuthenticated">
+  <!-- begin breadcrumb -->
+  <ol class="breadcrumb pull-right">
+    <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+  </ol>
+  <!-- end breadcrumb -->
+  <!-- begin page-header -->
+  <h1 class="page-header">All Hospitals <small>General view of All Hospitals</small></h1>
+  <!-- end page-header -->
+
+  <!-- Begin Row -->
+  <div class="row">
+    <!-- begin col-3 -->
+    <div class="col-lg-3 col-md-6">
+      <div class="widget widget-stats bg-gradient-red">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-plus-square"></i></div>
+        <div class="stats-content">
+          <div class="stats-title">ACCIDENT & EMERGENCY</div>
+          <div class="stats-number">124</div>
+          <div class="stats-progress progress">
+            <div class="progress-bar" style="width: 70.1%;"></div>
+          </div>
+          <div class="stats-desc">Bed Capacity (70.1%)</div>
+        </div>
+      </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-3 -->
+    <div class="col-lg-3 col-md-6">
+      <div class="widget widget-stats bg-gradient-blue">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-bed fa-fw"></i></div>
+        <div class="stats-content">
+          <div class="stats-title">INPATIENT</div>
+          <div class="stats-number">201</div>
+          <div class="stats-progress progress">
+            <div class="progress-bar" style="width: 40.5%;"></div>
+          </div>
+          <div class="stats-desc">Bed Capacity (40.5%)</div>
+        </div>
+      </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-3 -->
+    <div class="col-lg-3 col-md-6">
+      <div class="widget widget-stats bg-gradient-orange">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-bell fa-fw"></i></div>
+        <div class="stats-content">
+          <div class="stats-title">CRITICAL CARE</div>
+          <div class="stats-number">900</div>
+          <div class="stats-progress progress">
+            <div class="progress-bar" style="width: 76.3%;"></div>
+          </div>
+          <div class="stats-desc">Bed Capacity (76.3%)</div>
+        </div>
+      </div>
+    </div>
+    <!-- end col-3 -->
+    <!-- begin col-3 -->
+    <div class="col-lg-3 col-md-6">
+      <div class="widget widget-stats bg-gradient-green">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-blind fa-fw"></i></div>
+        <div class="stats-content">
+          <div class="stats-title">OUTPATIENTS</div>
+          <div class="stats-number">988</div>
+          <div class="stats-progress progress">
+            <div class="progress-bar" style="width: 54.9%;"></div>
+          </div>
+          <div class="stats-desc">Bed Capacity(54.9%)</div>
+        </div>
+      </div>
+    </div>
+    <!-- end col-3 -->
+  </div>
+  <!-- End Row -->
+
+  <!-- Begin Row -->
+  <div class="row">
+    <!-- begin col-8 -->
+    <div class="col-lg-8">
+      <div class="widget-chart with-sidebar">
+        <div class="widget-chart-content bg-black">
+          <h4 class="chart-title">
+            Visitors Analytics
+            <small>Paitent Intake</small>
+          </h4>
+          <div class="widget-chart-full-width nvd3-inverse-mode">
+            <nvd3 [options]="stackedChartOptions" [data]="stackedChartData"></nvd3>
+          </div>
+        </div>
+        <div class="widget-chart-sidebar bg-black-darker">
+          <div class="chart-number">
+            1,225,729
+            <small>Total visitors</small>
+          </div>
+          <div id="visitors-donut-chart" class="nvd3-inverse-mode p-t-10">
+            <nvd3 [options]="donutChartOptions" [data]="donutChartData"></nvd3>
+          </div>
+          <ul class="chart-legend f-s-11">
+            <li><i class="fa fa-circle fa-fw text-primary f-s-9 m-r-5 t-minus-1"></i> 34.0% <span>New Patients</span></li>
+            <li><i class="fa fa-circle fa-fw text-success f-s-9 m-r-5 t-minus-1"></i> 56.0% <span>Return Patients</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- end col-8 -->
+    <!-- begin col-4 -->
+    <div class="col-lg-4">
+      <panel title="Visitors Origin" noBody="true">
+        <ng-container noBody>
+          <div class="bg-black">
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="3" [styles]="mapStyles" style="height: 179px;">
+              <agm-marker *ngFor="let marker of mapMarkers" [longitude]="marker.lng" [latitude]="marker.lat"></agm-marker>
+            </agm-map>
+          </div>
+          <div class="list-group">
+            <a href="javascript:;" class="list-group-item list-group-item-inverse d-flex justify-content-between align-items-center text-ellipsis">
+              1. Chandler, AZ
+              <span class="badge f-w-500 bg-gradient-teal f-s-10">20.95%</span>
+            </a>
+            <a href="javascript:;" class="list-group-item list-group-item-inverse d-flex justify-content-between align-items-center text-ellipsis">
+              2. Phoenix, AZ
+              <span class="badge f-w-500 bg-gradient-blue f-s-10">16.12%</span>
+            </a>
+            <a href="javascript:;" class="list-group-item list-group-item-inverse d-flex justify-content-between align-items-center text-ellipsis">
+              3. Gilbert, AZ
+              <span class="badge f-w-500 bg-gradient-grey f-s-10">14.99%</span>
+            </a>
+          </div>
+        </ng-container>
+      </panel>
+    </div>
+    <!-- end col-4 -->
+  </div>
+  <!-- End Row -->
+
+  <!-- Begin Row -->
+  <div class="row">
+    <div class="col-md-12">
+        <ngb-tabset>
+            <ngb-tab>
+              <ng-template ngbTabTitle>
+                <span class="d-sm-none">Tab 1</span>
+                <span class="d-sm-block d-none">Accident & Emergency</span>
+              </ng-template>
+              <ng-template ngbTabContent>
+                  <div class="row">
+                      <!-- begin col-3 -->
+                      <div class="col-lg-2 col-md-4">
+                          <div class="widget widget-stats bg-black">
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Number of Patients</h4>
+                                <p>1,291,922</p>
+                              </div>
+
+                              <div class="stats-link">
+                                  <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                      <!-- begin col-3 -->
+                      <div class="col-lg-2 col-md-4">
+                          <div class="widget widget-stats bg-black">
+
+                              <!-- <div class="stats-icon"><i class="fa fa-genderless"></i></div> -->
+
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Gender Distribution</h4>
+                                      <div class="clearfix f-s-10 genderLabel">
+                                          Male
+                                      </div>
+                                       <div class="progress progress-sm rounded-corner m-b-5">
+
+                                        <div class="progress-bar bg-blue f-s-10 f-w-600" style="width: 60%;">121</div>
+                                      </div>
+                                      <div class="clearfix f-s-10 genderLabel">
+                                          Female
+                                        </div>
+                                      <div class="progress progress-sm rounded-corner m-b-5">
+
+                                        <div class="progress-bar bg-pink f-s-10 f-w-600" style="width: 40%;">80</div>
+                                      </div>
+                              </div>
+
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                      <!-- begin col-3 -->
+                      <div class="col-lg-3 col-md-4">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-globe"></i></div> -->
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Nationality</h4>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    National
+                                </div>
+                                 <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-green f-s-10 f-w-600" style="width: 60%;">61</div>
+                                </div>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    Non-National
+                                  </div>
+                                <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-red f-s-10 f-w-600" style="width: 40%;">51</div>
+                                </div>
+                              </div>
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                      <!-- begin col-3 -->
+                      <div class="col-lg-3 col-md-6">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-child"></i></div> -->
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Age</h4>
+                                <!-- <p>1,291,922</p> -->
+                                <div class="genderLabel">
+                                  <!-- <app-stacked-bar></app-stacked-bar> -->
+                                </div>
+                                <div class="clearfix f-s-10 genderLabel">
+                                  <div class="row" style="padding-left: 10px;">
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-red">Infants (0-1)</span></div>
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-gold">Adolescents (1-13)</span></div>
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-green">Adults (14-60)</span></div>
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-teal">Seniors (60+)</span></div>
+                                  </div>
+                                </div>
+
+                              </div>
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-lg-2 col-md-6">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-users"></i></div> -->
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Beds</h4>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    Occupied
+                                </div>
+                                 <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-red f-s-10 f-w-600" style="width: 60%;">180</div>
+                                </div>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    Available
+                                  </div>
+                                <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-greeb f-s-10 f-w-600" style="width: 40%;">21</div>
+                                </div>
+                              </div>
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                  </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle>
+                <span class="d-sm-none">Tab 2</span>
+                <span class="d-sm-block d-none">Inpatient</span>
+              </ng-template>
+              <ng-template ngbTabContent>
+
+                  <div class="row">
+                      <!-- begin col-3 -->
+                      <div class="col-lg-2 col-md-4">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-bed"></i></div> -->
+
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Number of Patients</h4>
+                                <p>1,291,922</p>
+                              </div>
+
+                              <div class="stats-link">
+                                  <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                      <!-- begin col-3 -->
+                      <div class="col-lg-2 col-md-4">
+                          <div class="widget widget-stats bg-black">
+
+                              <!-- <div class="stats-icon"><i class="fa fa-genderless"></i></div> -->
+
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Gender Distribution</h4>
+                                      <div class="clearfix f-s-10 genderLabel">
+                                          Male
+                                      </div>
+                                       <div class="progress progress-sm rounded-corner m-b-5">
+
+                                        <div class="progress-bar bg-blue f-s-10 f-w-600" style="width: 60%;">121</div>
+                                      </div>
+                                      <div class="clearfix f-s-10 genderLabel">
+                                          Female
+                                        </div>
+                                      <div class="progress progress-sm rounded-corner m-b-5">
+
+                                        <div class="progress-bar bg-pink f-s-10 f-w-600" style="width: 40%;">80</div>
+                                      </div>
+                              </div>
+
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                      <!-- begin col-3 -->
+                      <div class="col-lg-3 col-md-4">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-globe"></i></div> -->
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Nationality</h4>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    National
+                                </div>
+                                 <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-green f-s-10 f-w-600" style="width: 60%;">61</div>
+                                </div>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    Non-National
+                                  </div>
+                                <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-red f-s-10 f-w-600" style="width: 40%;">51</div>
+                                </div>
+                              </div>
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                      <!-- begin col-3 -->
+                      <div class="col-lg-3 col-md-6">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-child"></i></div> -->
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Age</h4>
+                                <!-- <p>1,291,922</p> -->
+                                <div class="genderLabel">
+                                  <!-- <app-stacked-bar></app-stacked-bar> -->
+                                </div>
+                                <div class="clearfix f-s-10 genderLabel">
+                                  <div class="row" style="padding-left: 10px;">
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-red">Infants (0-1)</span></div>
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-gold">Adolescents (1-13)</span></div>
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-green">Adults (14-60)</span></div>
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-teal">Seniors (60+)</span></div>
+                                  </div>
+                                </div>
+
+                              </div>
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-lg-2 col-md-6">
+                          <div class="widget widget-stats bg-black">
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Beds</h4>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    Occupied
+                                </div>
+                                 <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-red f-s-10 f-w-600" style="width: 60%;">180</div>
+                                </div>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    Available
+                                  </div>
+                                <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-greeb f-s-10 f-w-600" style="width: 40%;">21</div>
+                                </div>
+                              </div>
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                  </div>
+
+                  <table class="table table-bordered widget-table widget-table-rounded inverse-mode">
+                    <thead>
+                      <tr>
+                        <th>Department</th>
+                        <th>No of Patients</th>
+                        <th>Occupancy</th>
+                        <th>LOS</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <h4 class="widget-table-title">Coronary Care Unit</h4>
+                        </td>
+                        <td class="text-nowrap">
+                          <h5 class="text-white">4</h5><br />
+                        </td>
+                        <td>
+                            <div class="progress rounded-corner">
+                                <div class="progress-bar bg-danger" style="width: 90%"><b>90%</b></div>
+                            </div>
+                        </td>
+                        <td>
+                          1.8
+                        </td>
+                        <td><a href="#" class="btn btn-sm width-80 rounded-corner" [ngClass]="{'btn-inverse': lightMode, 'btn-default': darkMode}">View Details</a></td>
+                      </tr>
+                      <tr>
+                          <td>
+                            <h5 class="widget-table-title">ENT Opthalmology Ward</h5>
+
+                          </td>
+                          <td class="text-nowrap">
+                            <h5 class="text-white">4</h5><br/>
+                          </td>
+                          <td>
+                              <div class="progress rounded-corner">
+                                  <div class="progress-bar bg-green" style="width: 33%"><b>33%</b></div>
+                              </div>
+                          </td>
+                          <td>12.3</td>
+                          <td><a href="#" class="btn btn-sm width-80 rounded-corner" [ngClass]="{'btn-inverse': lightMode, 'btn-default': darkMode}">View Details</a></td>
+                      </tr>
+                      <tr>
+                            <td>
+                              <h5 class="widget-table-title">Female Surgical Ward</h5>
+
+                            </td>
+                            <td class="text-nowrap">
+                              <h5 class="text-white">10</h5><br />
+                            </td>
+                            <td>`
+                                <div class="progress rounded-corner">
+                                    <div class="progress-bar bg-green" style="width: 20%"><b>20%</b></div>
+                                </div>
+                            </td>
+                            <td>1.8</td>
+                            <td><a href="#" class="btn btn-sm width-80 rounded-corner" [ngClass]="{'btn-inverse': lightMode, 'btn-default': darkMode}">View Details</a></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h5 class="widget-table-title">Intensive Care Unit</h5>
+
+                        </td>
+                        <td class="text-nowrap">
+                          <h5 class="text-white">25</h5><br />
+                        </td>
+                        <td>`
+                            <div class="progress rounded-corner">
+                                <div class="progress-bar bg-warning" style="width: 70%"><b>70%</b></div>
+                            </div>
+                        </td>
+                        <td>1.8</td>
+                        <td><a href="#" class="btn btn-sm width-80 rounded-corner" [ngClass]="{'btn-inverse': lightMode, 'btn-default': darkMode}">View Details</a></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h5 class="widget-table-title">Male Medical Ward</h5>
+
+                        </td>
+                        <td class="text-nowrap">
+                          <h5 class="text-white">25</h5><br />
+                        </td>
+                        <td>`
+                            <div class="progress rounded-corner">
+                                <div class="progress-bar bg-warning" style="width: 70%"><b>70%</b></div>
+                            </div>
+                        </td>
+                        <td>1.8</td>
+                        <td><a href="#" class="btn btn-sm width-80 rounded-corner" [ngClass]="{'btn-inverse': lightMode, 'btn-default': darkMode}">View Details</a></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h5 class="widget-table-title">NICU / SCBBU</h5>
+
+                        </td>
+                        <td class="text-nowrap">
+                          <h5 class="text-white">25</h5><br />
+                        </td>
+                        <td>`
+                            <div class="progress rounded-corner">
+                                <div class="progress-bar bg-warning" style="width: 70%"><b>70%</b></div>
+                            </div>
+                        </td>
+                        <td>1.8</td>
+                        <td><a href="#" class="btn btn-sm width-80 rounded-corner" [ngClass]="{'btn-inverse': lightMode, 'btn-default': darkMode}">View Details</a></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h5 class="widget-table-title">Obstretics & Gynecology</h5>
+
+                        </td>
+                        <td class="text-nowrap">
+                          <h5 class="text-white">25</h5><br />
+                        </td>
+                        <td>`
+                            <div class="progress rounded-corner">
+                                <div class="progress-bar bg-warning" style="width: 70%"><b>70%</b></div>
+                            </div>
+                        </td>
+                        <td>1.8</td>
+                        <td><a href="#" class="btn btn-sm width-80 rounded-corner" [ngClass]="{'btn-inverse': lightMode, 'btn-default': darkMode}">View Details</a></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h5 class="widget-table-title">Neurology Department</h5>
+
+                        </td>
+                        <td class="text-nowrap">
+                          <h5 class="text-white">20</h5><br />
+                        </td>
+                        <td>`
+                            <div class="progress rounded-corner">
+                                <div class="progress-bar bg-green" style="width: 50%"><b>50%</b></div>
+                            </div>
+                        </td>
+                        <td>1.8</td>
+                        <td><a href="#" class="btn btn-sm width-80 rounded-corner" [ngClass]="{'btn-inverse': lightMode, 'btn-default': darkMode}">View Details</a></td>
+                  </tr>
+                    </tbody>
+                  </table>
+
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle>
+                <span class="d-sm-none">Tab 3</span>
+                <span class="d-sm-block d-none">Critical Care</span>
+              </ng-template>
+              <ng-template ngbTabContent>
+                  <div class="row">
+                      <!-- begin col-3 -->
+                      <div class="col-lg-2 col-md-4">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-bed"></i></div> -->
+
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Number of Patients</h4>
+                                <p>1,291,922</p>
+                              </div>
+
+                              <div class="stats-link">
+                                  <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                      <!-- begin col-3 -->
+                      <div class="col-lg-2 col-md-4">
+                          <div class="widget widget-stats bg-black">
+
+                              <!-- <div class="stats-icon"><i class="fa fa-genderless"></i></div> -->
+
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Gender Distribution</h4>
+                                      <div class="clearfix f-s-10 genderLabel">
+                                          Male
+                                      </div>
+                                       <div class="progress progress-sm rounded-corner m-b-5">
+
+                                        <div class="progress-bar bg-blue f-s-10 f-w-600" style="width: 60%;">121</div>
+                                      </div>
+                                      <div class="clearfix f-s-10 genderLabel">
+                                          Female
+                                        </div>
+                                      <div class="progress progress-sm rounded-corner m-b-5">
+
+                                        <div class="progress-bar bg-pink f-s-10 f-w-600" style="width: 40%;">80</div>
+                                      </div>
+                              </div>
+
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                      <!-- begin col-3 -->
+                      <div class="col-lg-3 col-md-4">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-globe"></i></div> -->
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Nationality</h4>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    National
+                                </div>
+                                 <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-green f-s-10 f-w-600" style="width: 60%;">61</div>
+                                </div>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    Non-National
+                                  </div>
+                                <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-red f-s-10 f-w-600" style="width: 40%;">51</div>
+                                </div>
+                              </div>
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                      <!-- begin col-3 -->
+                      <div class="col-lg-3 col-md-6">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-child"></i></div> -->
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Age</h4>
+                                <!-- <p>1,291,922</p> -->
+                                <div class="genderLabel">
+                                  <!-- <app-stacked-bar></app-stacked-bar> -->
+                                </div>
+                                <div class="clearfix f-s-10 genderLabel">
+                                  <div class="row" style="padding-left: 10px;">
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-red">Infants (0-1)</span></div>
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-gold">Adolescents (1-13)</span></div>
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-green">Adults (14-60)</span></div>
+                                      <div style="padding: 2px;"><span class="label label-inverse bg-teal">Seniors (60+)</span></div>
+                                  </div>
+                                </div>
+
+                              </div>
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-lg-2 col-md-6">
+                          <div class="widget widget-stats bg-black">
+                              <!-- <div class="stats-icon"><i class="fa fa-users"></i></div> -->
+                              <div class="stats-info" style="height: 90px;">
+                                <h4>Beds</h4>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    Occupied
+                                </div>
+                                 <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-red f-s-10 f-w-600" style="width: 60%;">180</div>
+                                </div>
+                                <div class="clearfix f-s-10 genderLabel">
+                                    Available
+                                  </div>
+                                <div class="progress progress-sm rounded-corner m-b-5">
+
+                                  <div class="progress-bar bg-greeb f-s-10 f-w-600" style="width: 40%;">21</div>
+                                </div>
+                              </div>
+                              <div class="stats-link">
+                                <a href="javascript:;">View Detail <i class="fa fa-arrow-alt-circle-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- end col-3 -->
+                  </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+                <ng-template ngbTabTitle>
+                  <span class="d-sm-none">Tab 4</span>
+                  <span class="d-sm-block d-none">Outpatient</span>
+                </ng-template>
+                <ng-template ngbTabContent>
+                  <p>
+                    <span class="fa-stack fa-4x pull-left m-r-10">
+                      <i class="fa fa-square-o fa-stack-2x"></i>
+                      <i class="fab fa-twitter fa-stack-1x"></i>
+                    </span>
+                    Praesent tincidunt nulla ut elit vestibulum viverra. Sed placerat magna eget eros accumsan elementum.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam quis lobortis neque.
+                    Maecenas justo odio, bibendum fringilla quam nec, commodo rutrum quam.
+                    Donec cursus erat in lacus congue sodales. Nunc bibendum id augue sit amet placerat.
+                    Quisque et quam id felis tempus volutpat at at diam. Vivamus ac diam turpis.Sed at lacinia augue.
+                    Nulla facilisi. Fusce at erat suscipit, dapibus elit quis, luctus nulla.
+                    Quisque adipiscing dui nec orci fermentum blandit.
+                    Sed at lacinia augue. Nulla facilisi. Fusce at erat suscipit, dapibus elit quis, luctus nulla.
+                    Quisque adipiscing dui nec orci fermentum blandit.
+                  </p>
+                </ng-template>
+              </ngb-tab>
+          </ngb-tabset>
+    </div>
+  </div>
+  <!-- End Row -->
+
+
+</div>
